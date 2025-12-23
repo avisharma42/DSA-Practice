@@ -1,0 +1,26 @@
+class Solution {
+public:
+    int splitArray(vector<int>& nums, int k) {
+        int low = 0;
+        int high = 0;
+        for(int num : nums){
+         low = max(num,low);
+         high = high + num;
+        }
+        while(low<=high){
+            int mid = low+(high-low)/2;
+            int parts = 1;
+            int currsum = 0;
+            for(int num : nums){
+                if(currsum+num>mid){
+                    parts++;
+                    currsum = num;
+                }
+                else currsum+=num;
+            }
+            if(parts<=k) high=mid-1;
+            else low = mid+1;
+        }
+        return low;
+    }
+};
