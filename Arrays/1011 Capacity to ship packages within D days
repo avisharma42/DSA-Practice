@@ -1,0 +1,31 @@
+class Solution {
+public:
+bool capacity(vector<int>& weights, int days , int w){
+    int takendays =1;
+    int load = 0;
+    for(int weigh : weights){
+        if(load+weigh > w){
+            takendays++;
+            load = 0;
+        }
+        load += weigh;
+    }
+    return takendays<=days;
+}
+    int shipWithinDays(vector<int>& weights, int days) {
+        int low = 0;
+        int high = 0;
+        for(int weigh : weights){
+            low = max(low,weigh);
+            high += weigh;
+        }
+        while(low<=high){
+            int mid = low+(high-low)/2;
+            if(capacity(weights , days , mid)){
+                high = mid-1;
+            }
+            else low = mid+1;
+        }
+        return low;
+    }
+};
