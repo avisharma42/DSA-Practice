@@ -28,4 +28,4 @@ bool capacity(vector<int>& weights, int days , int w){
         }
         return low;
     }
-};
+}
