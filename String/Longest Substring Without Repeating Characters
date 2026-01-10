@@ -1,0 +1,27 @@
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+
+        unordered_map<char, int> mp; // remembers last index of each char
+        int left = 0;   // start of substring
+        int ans = 0;    // maximum length
+
+        for (int right = 0; right < s.length(); right++) {
+
+            // if character already exists
+            if (mp.find(s[right]) != mp.end()) {
+
+                // move left after previous occurrence
+                left = max(left, mp[s[right]] + 1);
+            }
+
+            // update last index of character
+            mp[s[right]] = right;
+
+            // calculate length of current substring
+            ans = max(ans, right - left + 1);
+        }
+
+        return ans;
+    }
+};
