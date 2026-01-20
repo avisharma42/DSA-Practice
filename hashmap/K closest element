@@ -1,0 +1,22 @@
+class Solution {
+public:
+    vector<int> findClosestElements(vector<int>& arr, int k, int x) {
+        //create a max heap with a pair
+        priority_queue<pair<int,int>> maxheap;
+        vector<int> ans;
+        int n = arr.size();
+        //push the elements in the heap (pair) not size more than k
+        for(int i = 0 ; i < n ; i++){
+            maxheap.push({abs(arr[i]-x) , arr[i]});
+            if(maxheap.size()>k){
+                maxheap.pop();
+            }
+        }
+        while(!maxheap.empty()){
+            ans.push_back(maxheap.top().second);
+            maxheap.pop();
+        }
+        sort(ans.begin() , ans.end());
+        return ans;
+    }
+};
